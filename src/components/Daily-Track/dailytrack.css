@@ -1,0 +1,117 @@
+/* ========== DAILY SECTION ========== */
+.daily-content {
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+  background: #f7f8fa;
+}
+
+.daily-data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Daily Item Card */
+.daily-item {
+  flex: 1 1 220px;
+  min-width: 200px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon Circle */
+.daily-item .icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 18px auto;
+  background: linear-gradient(135deg, #f7b035, #ff914d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.daily-item .icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+/* Counter Number */
+.daily-item span {
+  font-size: clamp(1.8rem, 2.5vw, 3rem); /* scales between 1.8rem and 3rem */
+  font-weight: 700;
+  color: #f7b035;
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+/* Label Text */
+.daily-item h3 {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem); /* scales smoothly */
+  font-weight: 500;
+  color: #555;
+  margin: 0;
+}
+
+/* -------------------- RESPONSIVENESS -------------------- */
+
+/* Tablets (1024px) */
+@media (max-width: 1024px) {
+  .daily-content {
+    padding: 60px 15px;
+  }
+  .daily-item {
+    flex: 1 1 45%;
+    padding: 25px 18px;
+  }
+}
+
+/* Tablets & Large Phones (768px) */
+@media (max-width: 768px) {
+  .daily-content {
+    padding: 50px 15px;
+  }
+  .daily-item {
+    flex: 1 1 100%;
+  }
+  .daily-item .icon {
+    width: 55px;
+    height: 55px;
+  }
+  .daily-item .icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Small Phones (480px) */
+@media (max-width: 480px) {
+  .daily-content {
+    padding: 40px 12px;
+  }
+  .daily-item {
+    padding: 22px 16px;
+  }
+}
+
+/* Extra Small Phones (360px) */
+@media (max-width: 360px) {
+  .daily-item h3 {
+    font-size: 0.9rem;
+  }
+}

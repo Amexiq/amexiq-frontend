@@ -1,0 +1,243 @@
+/* ========== COFFEE SECTION ========== */
+.coffee-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 100px 10%;
+  gap: 120px;
+  background: #f7f7f7;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+
+/* Decorative leaf in background */
+.coffee-section::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  left: -40px;
+  width: 280px;
+  height: 280px;
+  background: url("../../assets/images/coffee-brew.png") no-repeat center/contain;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+/* Big faded background text */
+.background-text {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(30px, 8vw, 150px);
+  text-transform: uppercase;
+  color: rgba(134, 98, 74, 0.15);
+  font-family: Marcellus, serif;
+  font-weight: 400;
+  letter-spacing: -1px;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* Coffee image */
+.coffee-image img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Coffee content */
+.coffee-content {
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Small label */
+.small-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #f7b035;
+  margin-bottom: 15px;
+  font-size: clamp(12px, 1.6vw, 14px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Dot for feature list */
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #f7b035;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Title */
+.title {
+  color: #111;
+  font-family: Marcellus, serif;
+  font-weight: 400;
+  margin: 0;
+  font-size: clamp(22px, 5vw, 52px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* Description */
+.description {
+  margin-top: 15px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 520px;
+  font-size: clamp(13px, 1.8vw, 16px);
+}
+
+/* Feature list */
+.feature-list {
+  margin: 20px 0 0;
+  list-style: none;
+  padding: 0;
+  color: #333;
+}
+.feature-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(13px, 1.6vw, 16px);
+  color: #212121;
+}
+
+/* Actions */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+/* Feature box */
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+
+  width: 100%; /* auto adjusts in responsive */
+}
+
+/* Button */
+.book-btn {
+  outline: none;
+  border: none;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f7b035;
+  border-radius: 10px;
+  padding: clamp(10px, 2vw, 14px) clamp(16px, 4vw, 30px);
+  font-size: clamp(13px, 1.6vw, 15px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: fit-content;
+}
+.book-btn:hover {
+  background-color: #a07a4f;
+}
+
+/* Rating card */
+.rating-card {
+  background: #f7b035;
+  color: white;
+  width: clamp(180px, 40vw, 240px);
+  height: clamp(120px, 30vw, 170px);
+  border-radius: 12px;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rating {
+  font-size: clamp(28px, 6vw, 48px);
+  line-height: 1;
+  margin: 0;
+}
+.stars {
+  color: #ffd700;
+  font-size: clamp(14px, 2.5vw, 18px);
+  margin: 6px 0;
+  letter-spacing: 2px;
+}
+.note {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: clamp(12px, 1.5vw, 14px);
+  margin-top: 4px;
+}
+
+/* -------------------- RESPONSIVENESS -------------------- */
+
+/* Large tablets (1024px) */
+@media (max-width: 1024px) {
+  .coffee-section {
+    padding: 50px 5%;
+    gap: 80px;
+  }
+  .coffee-image img {
+    max-width: 280px;
+  }
+}
+
+/* Medium tablets (768px) */
+@media (max-width: 768px) {
+  .coffee-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 6%;
+    gap: 50px;
+  }
+  .coffee-image img {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+  .actions {
+    flex-direction: column;
+    margin: 0;
+    gap: 20px;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .coffee-section {
+    padding: 50px 20px;
+    gap: 40px;
+  }
+  .rating-card {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Extra small (360px) */
+@media (max-width: 360px) {
+  .coffee-section {
+    padding: 40px 15px;
+    gap: 30px;
+  }
+}

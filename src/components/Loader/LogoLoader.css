@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.letter-svg-wrapper {
+  display: inline-block;
+  background-color: #f7b035;
+  width: 90%; /* fluid width */
+  max-width: 1200px;
+  height: auto;
+}
+
+/* Bounce animation */
+.letter-bounce {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+              opacity 0.4s ease;
+}
+
+.letter-bounce.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
