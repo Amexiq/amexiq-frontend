@@ -12,6 +12,18 @@
   z-index: 1;
 }
 
+.about-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.65)
+  );
+  z-index: 1;
+}
+
 .about-content {
   display: flex;
   flex-direction: column;
@@ -22,16 +34,17 @@
   padding: 0 2rem;
   gap: 1rem;
   position: relative;
-  z-index: 1;
-  font-family: "Inter", sans-serif;
+  z-index: 2;
+  font-family: "Open Sans", sans-serif;
   color: white;
 }
 
 .about-content h1 {
+  font-family: "Playfair Display", serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: bold;
+  font-weight: 700;
   margin: 0;
-  color: #111111;
+  color: #fff;
 }
 
 .about-content .breadcrumb {
@@ -43,11 +56,12 @@
 
 .about-content .breadcrumb .home,
 .about-content .breadcrumb .separator {
-  color: #7a7d82;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .about-content .breadcrumb .current {
-  color: #f26c0d;
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .about-second-container {
@@ -108,7 +122,7 @@
 
 .about-year {
   font-weight: 500;
-  font-family: "Monoton", cursive;
+  font-family: "Playfair Display", serif;
   font-size: clamp(36px, 8vw, 72px);
   letter-spacing: -3px;
   margin: 0;
@@ -138,7 +152,7 @@
   gap: 0.5rem;
   font-family: "Rubik", sans-serif;
   font-weight: 600;
-  color: #f26c0d;
+  color: var(--color-accent);
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -147,7 +161,7 @@
 .dash {
   width: 30px;
   height: 3px;
-  background-color: #f26c0d;
+  background-color: var(--color-accent);
   border-radius: 2px;
 }
 
@@ -209,8 +223,8 @@
 }
 
 .point-number {
-  font-family: "Monoton", cursive;
-  color: #f5c332;
+  font-family: "Playfair Display", serif;
+  color: var(--color-accent);
   font-size: clamp(30px, 5vw, 42px);
   line-height: 36px;
   margin-right: 0;
@@ -299,7 +313,7 @@
 }
 
 .package-buttons .order-delivery {
-  background-color: #f5c332;
+  background-color: var(--color-accent);
   border: none;
   padding: 0.9rem 2rem;
   color: #000;
@@ -313,14 +327,14 @@
 }
 
 .package-buttons .order-delivery:hover {
-  background-color: #ddb91f;
+  background-color: var(--color-accent-hover);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
 .package-buttons .menu {
   background-color: transparent;
-  border: 2px solid #f5c332;
+  border: 2px solid var(--color-accent);
   padding: 0.9rem 2rem;
   color: inherit;
   font-size: clamp(14px, 2vw, 15px);
@@ -332,7 +346,7 @@
 }
 
 .package-buttons .menu:hover {
-  background-color: #f5c332;
+  background-color: var(--color-accent);
   color: #000;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);

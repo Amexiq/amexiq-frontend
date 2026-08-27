@@ -1,7 +1,15 @@
+:root {
+  /* Single source of truth for the brand accent — every button, active
+     state, and highlight across the site reads from these two instead
+     of a hardcoded hex, so the whole site's accent changes from here. */
+  --color-accent: #f7b035;
+  --color-accent-hover: #ffc860;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

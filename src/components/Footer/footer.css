@@ -1,6 +1,6 @@
 :root {
   --footer-bg-dark: rgba(0, 0, 0, 0.8);
-  --footer-accent: #f7b035;
+  --footer-accent: var(--color-accent);
   --footer-text: #f5f5f5;
 }
 
@@ -15,7 +15,7 @@
   width: 100%;
   overflow: hidden;
   z-index: 1;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .footer-container::before {
@@ -42,7 +42,41 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
   gap: 2rem;
+}
+
+/* Social Icons */
+.footer-social-button {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.footer-social-button a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--footer-accent);
+  background: rgba(247, 176, 53, 0.1);
+  border: 1.5px solid rgba(247, 176, 53, 0.4);
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-social-button a svg {
+  font-size: 20px;
+}
+
+.footer-social-button a:hover {
+  background-color: var(--footer-accent);
+  border-color: var(--footer-accent);
+  color: #111;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(247, 176, 53, 0.45);
 }
 
 .footer-items {
@@ -65,8 +99,9 @@
 .footer-contact h2,
 .footer-Hour h2,
 .footer-insta h2 {
-  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 600;
+  letter-spacing: 0.2px;
   color: var(--footer-accent);
   margin-bottom: 0.5rem;
 }
@@ -99,7 +134,7 @@
   filter: brightness(0) invert(1);
 }
 
-.footer-contact a {
+.footer-contact > a {
   font-weight: 600;
   color: var(--footer-accent);
   cursor: pointer;
@@ -109,50 +144,28 @@
   transition: color 0.3s ease;
 }
 
+.footer-contact ul li a {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
 /* Footer Hours */
-.footer-Hour ul {
-  padding: 0;
-  margin: 0;
-}
-
-.footer-Hour ul li {
-  list-style: none;
-}
-
-.footer-Hour .working-item {
+.hours-text {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
+  gap: 0.6rem;
   font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  color: #eee;
   font-family: 'Open Sans', sans-serif;
-  padding: 0.3rem 0;
+  font-weight: 500;
+  color: #eee;
+  line-height: 1.5;
 }
 
-.footer-Hour .working-item::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  border-bottom: 1px dashed var(--footer-accent);
-  transform: translateY(-50%);
-  z-index: 0;
-  opacity: 0.5;
-}
-
-.working-day,
-.working-hour {
-  background-color: rgba(0, 0, 0, 0.85);
-  z-index: 1;
-  padding: 0 0.75rem;
-  border-radius: 6px;
-}
-
-.working-hour {
+.hours-text svg {
+  flex-shrink: 0;
+  font-size: 1.2rem;
   color: var(--footer-accent);
-  font-family: 'Delius Unicase', cursive;
 }
 
 /* Footer Instagram */

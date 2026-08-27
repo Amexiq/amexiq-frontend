@@ -23,6 +23,22 @@
   z-index: 1;
 }
 
+.menu-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.65)
+  );
+  z-index: 1;
+}
+
+.menu-banner .menu-content {
+  z-index: 2;
+}
+
 .menu-content {
   display: flex;
   flex-direction: column;
@@ -33,21 +49,22 @@
   gap: 1rem;
   padding: 0 1.5rem;
   margin-top: 2rem;
-  font-family: "Inter", sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: white;
   position: relative;
   z-index: 1;
 }
 
-.menu-content h1 {
+.menu-banner .menu-content h1 {
+  font-family: "Playfair Display", serif;
   font-size: var(--h1-size);
-  font-weight: bold;
+  font-weight: 700;
   margin: 0;
-  color: #111;
+  color: #fff;
   text-align: center;
 }
 
-.menu-content .breadcrumb {
+.menu-banner .menu-content .breadcrumb {
   font-size: var(--breadcrumb-size);
   display: flex;
   gap: 0.5rem;
@@ -57,12 +74,13 @@
   text-align: center;
 }
 
-.menu-content .breadcrumb .home,
-.menu-content .breadcrumb .separator {
-  color: #7a7d82;
+.menu-banner .menu-content .breadcrumb .home,
+.menu-banner .menu-content .breadcrumb .separator {
+  color: rgba(255, 255, 255, 0.7);
 }
-.menu-content .breadcrumb .current {
-  color: #f26c0d;
+.menu-banner .menu-content .breadcrumb .current {
+  color: var(--color-accent);
+  font-weight: 600;
 }
 .menu-content,
 .menu-main {
@@ -122,7 +140,7 @@ margin: 0 auto;
   font-weight: 600;
   border: 2px solid transparent;
   transition: 0.3s all ease-in-out;
-  background-color: #f5c332;
+  background-color: var(--color-accent);
   color: #000;
   font-family: "Rubik", sans-serif;
   white-space: nowrap;
@@ -130,7 +148,7 @@ margin: 0 auto;
 .menu-title button:hover {
   transform: translateX(5px);
   background-color: white;
-  border: 2px dotted #f5c332;
+  border: 2px dotted var(--color-accent);
 }
 
 .menu-wrapper {
@@ -212,7 +230,7 @@ margin: 0 auto;
 }
 
 .menu-item-header h2 {
-  font-family: "Forum", sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: var(--h2-size);
   font-weight: 500;
   color: #000;
@@ -225,7 +243,7 @@ margin: 0 auto;
 }
 
 .menu-price {
-  font-family: "Forum", sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: var(--price-size);
   font-weight: 500;
   color: #000;
@@ -305,7 +323,7 @@ margin: 0 auto;
 }
 .menu-category ul li.active,
 .menu-category ul li:hover {
-  background-color: #f7b035;
+  background-color: var(--color-accent);
   color: white;
 }
 

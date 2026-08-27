@@ -2,7 +2,7 @@
 
 .letter-svg-wrapper {
   display: inline-block;
-  background-color: #f7b035;
+  background-color: var(--color-accent);
   width: 90%; /* fluid width */
   max-width: 1200px;
   height: auto;

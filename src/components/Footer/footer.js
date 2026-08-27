@@ -4,9 +4,9 @@ import Pin from "../../assets/images/location.png";
 import Phone from "../../assets/images/phone-call.png";
 import Mail from "../../assets/images/at.png";
 import Headerlogo from "../../assets/images/header-logo.png";
-import WhatsAppIcon from "../../assets/images/whatsapp.png";
-import FacebookIcon from "../../assets/images/facebook.png";
-import InstagramIcon from "../../assets/images/instagram.png";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import Amexiq1 from "../../assets/images/amexiq-1.png";
 import Amexiq2 from "../../assets/images/amexiq-2.png";
 import Amexiq3 from "../../assets/images/amexiq-3.png";
@@ -17,7 +17,15 @@ import Amexiq5 from "../../assets/images/amexiq-4.png";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
+
+// Add/edit your social profiles here — each entry needs an icon and a url.
+const socialLinks = [
+  { name: "WhatsApp", icon: WhatsAppIcon, url: "https://wa.me/971557347125" },
+  { name: "Facebook", icon: FacebookIcon, url: "https://facebook.com/" },
+  { name: "Instagram", icon: InstagramIcon, url: "https://instagram.com/" },
+];
 
 export default function Footer() {
   const Insta = [Amexiq1, Amexiq2, Amexiq3, Amexiq4];
@@ -47,15 +55,17 @@ export default function Footer() {
               {" "}
               <img src={Headerlogo} alt="" />
               <div className="footer-social-button">
-                <button>
-                  <img src={WhatsAppIcon} alt="WhatsApp" />
-                </button>
-                <button>
-                  <img src={FacebookIcon} alt="Facebook" />
-                </button>
-                <button>
-                  <img src={InstagramIcon} alt="Instagram" />
-                </button>
+                {socialLinks.map(({ name, icon: Icon, url }) => (
+                  <a
+                    key={name}
+                    href={url}
+                    aria-label={name}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon />
+                  </a>
+                ))}
               </div>
             </div>
             <div className="footer-underline"></div>
@@ -72,37 +82,23 @@ export default function Footer() {
                 </li>
                 <li>
                   <img src={Phone} alt="Phone" />
-                  <span>+971 55 734 7125</span>
+                  <span><a href="tel:+971557347125" target="_blank" rel="noopener noreferrer">+971 55 734 7125</a></span>
                 </li>
                 <li>
                   <img src={Mail} alt="Email" />
-                  <span>info@amexiqae.com</span>
+                  <span><a href="mailto:info@amexiqae.com" target="_blank" rel="noopener noreferrer">info@amexiqae.com</a></span>
                 </li>
               </ul>
-              <Link to="contact">Read More</Link>
+              {/* <Link to="contact">Read More</Link> */}
             </div>
 
             {/* Opening Hours Section */}
             <div className="footer-Hour">
               <h2>Opening Hours</h2>
-              <ul>
-                {[
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                  "Sunday",
-                ].map((day) => (
-                  <li key={day}>
-                    <div className="working-item">
-                      <div className="working-day">{day}</div>
-                      <div className="working-hour">8.00 - 20.00</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <p className="hours-text">
+                <AccessTimeIcon />
+                We're open every day, 08:00 AM – 08:00 PM
+              </p>
             </div>
 
             {/* Instagram Gallery Section */}
@@ -115,7 +111,7 @@ export default function Footer() {
                 ))}
               </div>
               <div className="More-button">
-                <Link to="gallery">See More</Link>
+                <span></span>
                 <div className="next-prev">
                   <button onClick={handlePrev}>
                     <ArrowBackIcon />
@@ -128,8 +124,8 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-underline"></div>
-          <div class="footer-bottom">
-            © 2025 BrilientTech. All Rights Reserved.
+          <div className="footer-bottom">
+            © {new Date().getFullYear()} Amexiq. All Rights Reserved.
           </div>
         </div>
       </FadeWrapper>

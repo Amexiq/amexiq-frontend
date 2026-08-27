@@ -37,7 +37,7 @@
   width: 60px;
   height: 60px;
   margin: 0 auto 18px auto;
-  background: linear-gradient(135deg, #f7b035, #ff914d);
+  background: linear-gradient(135deg, var(--color-accent), #ff914d);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
 .daily-item span {
   font-size: clamp(1.8rem, 2.5vw, 3rem); /* scales between 1.8rem and 3rem */
   font-weight: 700;
-  color: #f7b035;
+  color: var(--color-accent);
   display: block;
   margin-bottom: 12px;
   line-height: 1.2;

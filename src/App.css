@@ -15,13 +15,13 @@
 }
 
 ::-webkit-scrollbar-thumb{
-  background-color: #f7b035;
+  background-color: var(--color-accent);
   border-radius: 10px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color:  #f7b035 black;
+  scrollbar-color:  var(--color-accent) black;
 }
 .loader-container {
   position: fixed;

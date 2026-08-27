@@ -39,7 +39,7 @@
 }
 
 .main-text .highlight {
-  color: #f7b035;
+  color: var(--color-accent);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -78,7 +78,7 @@
 }
 
 .btn-primary {
-  background: #f7b035;
+  background: var(--color-accent);
   color: #fff;
   border: 0;
 }
@@ -89,12 +89,12 @@
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #f7b035;
-  color: #f7b035;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
 }
 
 .btn-outline:hover {
-  background: #f7b035;
+  background: var(--color-accent);
   color: #fff;
 }
 
@@ -129,12 +129,15 @@
   flex: 0 0 260px;
   background: #fff;
   color: #333;
-  padding: 20px;
+  padding: 24px 20px;
   border-radius: 18px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   scroll-snap-align: start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .product-card:hover {
@@ -145,18 +148,18 @@
 .product-card img {
   width: 100%;
   max-width: 180px;
-  margin: 0 auto 15px;
+  margin: 0 0 16px;
   display: block;
 }
 
 .product-card h3 {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 600;
-  margin: 8px 0;
+  margin: 0 0 10px;
 }
 
 .stars {
-  margin: 6px 0;
+  margin: 0 0 20px;
 }
 
 .star {
@@ -165,7 +168,7 @@
 }
 
 .star.filled {
-  color: #f7b035;
+  color: var(--color-accent);
 }
 
 .price {
@@ -181,20 +184,22 @@
 }
 
 .cart-btn {
-  background: #f7b035;
+  background: var(--color-accent);
   color: #fff;
-  padding: 10px 18px;
+  padding: 11px 30px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 30px;
   font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
   text-decoration: none;
+  margin-top: auto;
 }
 
 .cart-btn:hover {
   background: #b07a4f;
-
+  transform: translateY(-2px);
 }
 
 /* =============== RESPONSIVE BREAKPOINTS =============== */
