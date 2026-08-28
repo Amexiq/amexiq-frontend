@@ -75,6 +75,7 @@ export default function ContactUs() {
       {/* Banner */}
       <section className="contact-banner">
         <div className="contact-content">
+          <p className="contact-eyebrow">Get In Touch</p>
           <h1>Contact Us</h1>
           <div className="breadcrumb">
             <span className="home">Home</span>

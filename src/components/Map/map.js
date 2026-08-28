@@ -1,46 +1,21 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { FaMapMarkerAlt, FaPhoneAlt, FaArrowRight } from "react-icons/fa";
 import "./map.css";
 
-import A1 from "../../assets/images/amexiq-1.png";
-import A2 from "../../assets/images/amexiq-2.png";
-import A3 from "../../assets/images/amexiq-3.png";
-import A4 from "../../assets/images/amexiq-4.png";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
-
-const branches = [
-  {
-    name: "Dubai Branch",
-    address: "123 Main St, Dubai, UAE",
-    phone: "+971 123 456 789",
-    image: A1,
-    mapLink: "https://goo.gl/maps/Xz2ZVphZt6o",
-  },
-  {
-    name: "Sharjah Branch",
-    address: "456 Central Rd, Sharjah, UAE",
-    phone: "+971 987 654 321",
-    image: A2,
-    mapLink: "https://goo.gl/maps/Fx3NvEYF9F12",
-  },
-  {
-    name: "Abu Dhabi Branch",
-    address: "789 Corniche Rd, Abu Dhabi, UAE",
-    phone: "+971 555 123 456",
-    image: A3,
-    mapLink: "https://goo.gl/maps/NMf5sVkG62w",
-  },
-  {
-    name: "Ajman Branch",
-    address: "321 Beach Rd, Ajman, UAE",
-    phone: "+971 444 888 999",
-    image: A4,
-    mapLink: "https://goo.gl/maps/NMf5sVkG62w",
-  },
-];
+import { sanityClient, urlFor } from "../../sanity/client";
+import { branchesQuery } from "../../sanity/queries";
 
 const BranchesSection = () => {
   const scrollRef = useRef(null);
+  const [branches, setBranches] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(branchesQuery)
+      .then((data) => setBranches(data))
+      .catch((err) => console.error("Failed to fetch branches:", err));
+  }, []);
 
   useEffect(() => {
     const slider = scrollRef.current;
@@ -99,9 +74,13 @@ const BranchesSection = () => {
       </div>
 
       <div className="branches-cards" ref={scrollRef}>
-        {branches.map((branch, idx) => (
-          <div className="branch-card-new" key={idx}>
-            <img src={branch.image} alt={branch.name} className="branch-bg" />
+        {branches.map((branch) => (
+          <div className="branch-card-new" key={branch._id}>
+            <img
+              src={branch.image ? urlFor(branch.image).width(500).url() : undefined}
+              alt={branch.name}
+              className="branch-bg"
+            />
             <div className="branch-overlay"></div>
 
             <div className="branch-content">
@@ -113,11 +92,11 @@ const BranchesSection = () => {
                 <FaPhoneAlt /> {branch.phone}
               </p>
               <div className="branch-actions">
-                <a href={`tel:${branch.phone}`} className="branch-btn">
+                <a href={`tel:${branch.phone || ""}`} className="branch-btn">
                   Call Now
                 </a>
                 <a
-                  href={branch.mapLink}
+                  href={branch.mapLink || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="branch-btn outline"

@@ -1,85 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./menu.css";
-import Burger from "../../assets/images/thumb-1.png";
-import Noodles from "../../assets/images/thumb-5.png";
-import Pizza from "../../assets/images/thumb-2.png";
-import Biryani from "../../assets/images/thumb-7.png";
-import Roll from "../../assets/images/thumb-8.png";
-import Sandwich from "../../assets/images/thumb-6-1.png";
 import { Star } from "@mui/icons-material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
+import { sanityClient, urlFor } from "../../sanity/client";
+import { menuItemsQuery } from "../../sanity/queries";
 
 export default function Menu() {
-  const menuItems = [
-    {
-      id: 1,
-      categories: "main dishes",
-      name: "Burger",
-      price: "",
-      description:
-        "Sink your teeth into our delicious beef burger, grilled to perfection and stacked with crisp lettuce, juicy tomatoes, onions, and melted cheese. Served on a toasted sesame bun with our signature special sauce.",
-      image: Burger,
-      reviews: "4.8k",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Noodles",
-      price: "",
-      categories: "main dishes",
-      description:
-        "Enjoy our savory stir-fried noodles tossed with colorful vegetables and a rich garlic-soy sauce. Lightly seasoned and cooked with just the right balance of spice and flavor.",
-      image: Noodles,
-      reviews: "3.6k",
-      rating: 4,
-    },
-    {
-      id: 3,
-      name: "Pizza",
-      price: "",
-      categories: "main dishes",
-      description:
-        "Our stone-baked pizza features a thin, crispy crust topped with rich tomato sauce, fresh mozzarella, and fragrant basil leaves.",
-      image: Pizza,
-      reviews: "4.2k",
-      rating: 4,
-    },
-    {
-      id: 4,
-      name: "Biryani",
-      price: "",
-      categories: "drinks",
-      description:
-        "A royal dish crafted with fragrant basmati rice, marinated chicken, caramelized onions, and a perfect blend of spices.",
-      image: Biryani,
-      reviews: "5.1k",
-      rating: 5,
-    },
-    {
-      id: 5,
-      name: "Roll",
-      price: "",
-      categories: "dessert",
-      description:
-        "Try our flavorful roll packed with grilled chicken, tangy sauces, fresh lettuce, and crispy onions. All wrapped inside a warm, soft flatbread.",
-      image: Roll,
-      reviews: "3.9k",
-      rating: 4,
-    },
-    {
-      id: 6,
-      name: "Sandwich",
-      price: "",
-      categories: "drinks",
-      description:
-        "Our grilled sandwich is made with fresh garden vegetables, cheese slices, and house-made spreads layered between toasted bread.",
-      image: Sandwich,
-      reviews: "6.2k",
-      rating: 5,
-    },
-  ];
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(menuItemsQuery)
+      .then((data) => setMenuItems(data))
+      .catch((err) => console.error("Failed to fetch menu items:", err));
+  }, []);
 
   const path = useLocation();
   const [activeCategory, setActiveCategory] = useState("All Dishes");
@@ -122,11 +58,12 @@ export default function Menu() {
       setFinalData(menuItems);
     } else {
       const filteredData = menuItems.filter(
-        (item) => item.categories.toLowerCase() === activeCategory.toLowerCase()
+        (item) =>
+          (item.categories || "").toLowerCase() === activeCategory.toLowerCase()
       );
       setFinalData(filteredData);
     }
-  }, [activeCategory]);
+  }, [activeCategory, menuItems]);
 
   const isMenuPage = path.pathname === "/menu";
 
@@ -135,6 +72,7 @@ export default function Menu() {
       {isMenuPage && (
         <section className="menu-banner">
           <div className="menu-content">
+            <p className="menu-banner-eyebrow">What We Serve</p>
             <h1>Our Menu</h1>
             <div className="breadcrumb">
               <span className="home">Home</span>
@@ -208,10 +146,17 @@ export default function Menu() {
                 <div
                   className="menu-item"
                   style={{ animationDelay: `${index * 0.1}s` }}
-                  key={item.id}
+                  key={item._id}
                 >
                   <div className="menu-item-image" tabIndex="0">
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={
+                        item.image
+                          ? urlFor(item.image).width(400).url()
+                          : undefined
+                      }
+                      alt={item.name}
+                    />
                     <div className="menu-model">{item.description}</div>
                   </div>
 
@@ -236,7 +181,7 @@ export default function Menu() {
                     </div>
 
                     <p className="menu-description">
-                      {item.description.length > 60
+                      {(item.description || "").length > 60
                         ? item.description.substring(0, 55) + "..."
                         : item.description}
                     </p>

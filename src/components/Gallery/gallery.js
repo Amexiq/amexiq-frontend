@@ -5,113 +5,32 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
-
+import { sanityClient, urlFor } from "../../sanity/client";
+import { galleryImagesQuery } from "../../sanity/queries";
 
 export default function Gallery() {
-  const categories = ["All", "Events", "Exterior", "Interior", "Menu"];
+  const [cafeGalleryImages, setCafeGalleryImages] = useState([]);
 
-  const cafeGalleryImages = [
-    // Events
-    {
-      title: "Poetry Slam Night",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb1GgCxytscQyiUv0ICdSUEZ32xgGkUa5EZA&s",
-      source: "Freepik",
-      category: "Events",
-    },
-    {
-      title: "Stand-up Comedy Show",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-Rs6hrOLszxSnYIeds2-PTO66DIYqp-3Kg&s",
-      source: "Freepik",
-      category: "Events",
-    },
-    {
-      title: "Tasting Event",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbovu1lvl4ew6XKwdW_HUyKxI4JdnIPSGGXg&s",
-      source: "Freepik",
-      category: "Events",
-    },
-    {
-      title: "Cooking Class",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL1ZUVJ9PKY3WOD4UynXzYimXdDeo97Bgsmw&s",
-      source: "Freepik",
-      category: "Events",
-    },
-    {
-      title: "Photography Exhibition",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfWlKVv0i-4VTLxyVuolucW4R4t833o8VMSQ&s",
-      source: "Freepik",
-      category: "Events",
-    },
+  useEffect(() => {
+    sanityClient
+      .fetch(galleryImagesQuery)
+      .then((data) =>
+        setCafeGalleryImages(
+          data.map((item) => ({
+            title: item.title,
+            category: item.category,
+            url: item.image ? urlFor(item.image).width(600).url() : "",
+          }))
+        )
+      )
+      .catch((err) => console.error("Failed to fetch gallery images:", err));
+  }, []);
 
-    // Interior
-    {
-      title: "Modern Coffee Shop Interior",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Q_TO9AUVoNsUf1WB51G_bVeurmbIlAY-qw&s",
-      source: "Pexels",
-      category: "Interior",
-    },
-    {
-      title: "Rustic Café with Plants",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYrgNgm0HKE2Zjb7xq93W-kqg_w0462THipw&s",
-      source: "Unsplash",
-      category: "Interior",
-    },
-    {
-      title: "Minimal Café Decor",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjH4L07YRS_XjGanpkWZbmUqLDp93Ix_N4cYt99XkXdTtRkZJxZBKwNwBZ5Mws1U4S3so&usqp=CAU",
-      source: "Unsplash",
-      category: "Interior",
-    },
-
-    // Menu
-    {
-      title: "Chalkboard Menu Design",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5Q0UO-RzWgz4P3nzuNII2LwkyuCR4pPlPoQ&s",
-      source: "Unsplash",
-      category: "Menu",
-    },
-    {
-      title: "Modern Menu Layout",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu102okO5GTLl0ACxYTbkNemtJ6VAzwDJk0g&s",
-      source: "Unsplash",
-      category: "Menu",
-    },
-    {
-      title: "Vintage Café Menu",
-      url: "https://images.deliveryhero.io/image/talabat/MenuItems/mmw_638654672469944363",
-      source: "Unsplash",
-      category: "Menu",
-    },
-    {
-      title: "Handwritten Menu Board",
-      url: "https://www.seriouseats.com/thmb/YBUAG17xy1nWYGPmFcJKeoODTzk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/cheese-sauce-for-cheese-fries-and-nachos-hero-01-e6ccf966688c43ec8025cf9a19678423.jpg",
-      source: "Pexels",
-      category: "Menu",
-    },
-    {
-      title: "Minimalist Menu Design",
-      url: "https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg",
-      source: "Pexels",
-      category: "Menu",
-    },
-    {
-      title: "Colorful Menu Display",
-      url: "https://www.nestleprofessional.in/sites/default/files/2024-10/Coconut-Ice-cream-756x471_5_11zon.jpg",
-      source: "Pexels",
-      category: "Menu",
-    },
-    {
-      title: "Elegant Menu Presentation",
-      url: "https://img.freepik.com/premium-psd/refreshing-fruit-smoothies-glasses-with-fresh-fruit_632498-51074.jpg",
-      source: "Unsplash",
-      category: "Menu",
-    },
-    {
-      title: "Café Specials Board",
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBw5DiY_bQsKP6Pr2E1cPdkOYw0l9WJCCorQ&s",
-      source: "Unsplash",
-      category: "Menu",
-    },
+  const categories = [
+    "All",
+    ...Array.from(
+      new Set(cafeGalleryImages.map((img) => img.category).filter(Boolean))
+    ),
   ];
 
   const breakpoints = { default: 4, 1100: 3, 700: 2, 500: 2 };
@@ -146,7 +65,8 @@ export default function Gallery() {
 
   // Generate circular visible categories
   const visibleCategories = [];
-  for (let i = 0; i < visibleCount; i++) {
+  const slotCount = Math.min(visibleCount, categories.length);
+  for (let i = 0; i < slotCount; i++) {
     visibleCategories.push(categories[(startIndex + i) % categories.length]);
   }
 
@@ -161,12 +81,13 @@ export default function Gallery() {
       );
 
     }
-  }, [activeCategory]);
+  }, [activeCategory, cafeGalleryImages]);
 
   return (
     <>
       <section className="galley-banner">
         <div className="galley-content">
+          <p className="galley-eyebrow">Moments & Memories</p>
           <h1>Our Gallery</h1>
           <div className="breadcrumb">
             <span className="home">Home</span>

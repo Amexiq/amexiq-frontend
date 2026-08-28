@@ -46,6 +46,34 @@
   gap: 2rem;
 }
 
+.footer-logos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-logo-partner {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+  .footer-logo {
+    height: 36px;
+  }
+  .footer-logo-partner {
+    padding: 4px 8px;
+  }
+}
+
 /* Social Icons */
 .footer-social-button {
   display: flex;
@@ -210,37 +238,18 @@
   margin-top: 0.75rem;
 }
 
-.More-button span {
+.More-button a {
   font-weight: 600;
   color: var(--footer-accent);
   cursor: pointer;
   font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  text-decoration: none;
   user-select: none;
   transition: color 0.3s ease;
 }
 
-.More-button span:hover {
+.More-button a:hover {
   color: #ffd369;
-}
-
-/* Next/Prev Buttons */
-.next-prev {
-  display: flex;
-  gap: 1rem;
-}
-
-.next-prev button {
-  background: transparent;
-  color: var(--footer-accent);
-  border: 2px solid var(--footer-accent);
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s, color 0.3s;
 }
 
 .next-prev button:hover {

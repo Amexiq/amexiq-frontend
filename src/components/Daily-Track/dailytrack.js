@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./dailytrack.css";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
+import { sanityClient } from "../../sanity/client";
+import { homeStatsQuery } from "../../sanity/queries";
 
 const icons = {
   orders: (
@@ -25,7 +27,7 @@ const icons = {
   ),
 };
 
-const Counter = ({ end, label, icon }) => {
+const Counter = ({ end, label, suffix, icon }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -48,25 +50,47 @@ const Counter = ({ end, label, icon }) => {
   return (
     <div className="daily-item">
       <div className="icon">{icon}</div>
-      <span>{count}+</span>
+      <span>
+        {count}
+        {suffix}
+      </span>
       <h3>{label}</h3>
     </div>
   );
 };
 
+const fallbackStats = [
+  { label: "Orders Every Day", value: 150, suffix: "+", icon: "orders" },
+  { label: "Menu & Dishes", value: 47, suffix: "+", icon: "menu" },
+  { label: "Daily Visitors", value: 2450, suffix: "+", icon: "visitors" },
+  { label: "Monthly Deliveries", value: 340, suffix: "+", icon: "deliveries" },
+];
+
 export default function DailyTrack() {
+  const [stats, setStats] = useState(fallbackStats);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(homeStatsQuery)
+      .then((data) => {
+        if (data?.stats?.length > 0) setStats(data.stats);
+      })
+      .catch((err) => console.error("Failed to fetch home stats:", err));
+  }, []);
+
   return (
     <FadeWrapper baseDelay={0} gap={150}>
       <div className="daily-content">
         <div className="daily-data">
-          <Counter end={150} label="Orders Every Day" icon={icons.orders} />
-          <Counter end={47} label="Menu & Dishes" icon={icons.menu} />
-          <Counter end={2450} label="Daily Visitors" icon={icons.visitors} />
-          <Counter
-            end={340}
-            label="Monthly Deliveries"
-            icon={icons.deliveries}
-          />
+          {stats.map((stat, index) => (
+            <Counter
+              key={index}
+              end={stat.value}
+              label={stat.label}
+              suffix={stat.suffix || "+"}
+              icon={icons[stat.icon] || icons.orders}
+            />
+          ))}
         </div>
       </div>
     </FadeWrapper>

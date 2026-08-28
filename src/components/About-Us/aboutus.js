@@ -1,53 +1,41 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Amexiq1 from "../../assets/images/amexiq-1.png";
 import Package from "../../assets/images/pack.png";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
 import "./aboutus.css";
+import { sanityClient, urlFor } from "../../sanity/client";
+import { aboutUsQuery } from "../../sanity/queries";
+
+const fallbackParagraphs = [
+  "Launched in 2007 in the UAE, AmexiQ Café has been delighting visitors with high-quality snacks, sweet treats, and specialty beverages. Our passion is creating memorable food experiences, from buttery nachos and gourmet popcorn to sweet crepes and refreshing slushes.",
+  "With outlets across Dubai and Abu Dhabi, we combine a cozy, modern café ambience with innovative flavors, premium ingredients, and friendly service. Every visit promises fun, flavor, and a little touch of magic.",
+  "Our mission is simple: serve the finest food and snacks with care and creativity, making every bite enjoyable and every cup memorable. Welcome to AmexiQ Café!",
+];
 
 export default function AboutSection() {
-  const Points = [
-    {
-      number: "01",
-      heading: "Located in the Heart of the City",
-      title:
-        "AmexiQ Café is conveniently situated in the city center, making it easy to stop by for a coffee or snack anytime.",
-    },
-    {
-      number: "02",
-      heading: "Fresh Ingredients, Always",
-      title:
-        "We use only high-quality, fresh ingredients for our coffee, pastries, and snacks to ensure every bite is delicious.",
-    },
-    {
-      number: "03",
-      heading: "Artisan Coffee & Bold Flavors",
-      title:
-        "Our expert baristas craft each coffee with care, bringing bold and memorable flavors to every cup.",
-    },
-    {
-      number: "04",
-      heading: "Handmade Snacks & Treats",
-      title:
-        "From buttery popcorn and cheesy nachos to sweet delights, everything is freshly prepared for maximum flavor.",
-    },
-    {
-      number: "05",
-      heading: "Cozy & Modern Café Ambience",
-      title:
-        "Relax and unwind in our stylish, welcoming space, perfect for casual meetups or solo coffee breaks.",
-    },
-    {
-      number: "06",
-      heading: "Friendly & Experienced Team",
-      title:
-        "Our team is passionate about coffee and snacks, providing warm, professional service every time you visit.",
-    },
-  ];
+  const [aboutData, setAboutData] = useState(null);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(aboutUsQuery)
+      .then((data) => setAboutData(data))
+      .catch((err) => console.error("Failed to fetch About Us content:", err));
+  }, []);
+
+  const heading = aboutData?.heading || "We are doing more than you expect";
+  const paragraphs = aboutData?.body
+    ? aboutData.body.split(/\n\s*\n/).filter(Boolean)
+    : fallbackParagraphs;
+  const points = aboutData?.points || [];
+  const sectionImage = aboutData?.image
+    ? urlFor(aboutData.image).width(700).url()
+    : Amexiq1;
 
   return (
     <>
       <section className="about-banner">
         <div className="about-content">
+          <p className="about-eyebrow">Our Story</p>
           <h1>About Us</h1>
           <div className="breadcrumb">
             <span className="home">Home</span>
@@ -60,7 +48,7 @@ export default function AboutSection() {
       <section className="about-second-container">
         <div className="about-second-image">
           <div className="slide-second-wrapper">
-            <img src={Amexiq1} alt="Amexiq building" />
+            <img src={sectionImage} alt="Amexiq building" />
           </div>
         </div>
 
@@ -70,36 +58,23 @@ export default function AboutSection() {
               <span className="dash"></span>
               <span>About Us</span>
             </div>
-            <h3>We are doing more than you expect</h3>
-            <p>
-              Launched in 2007 in the UAE, AmexiQ Café has been delighting
-              visitors with high-quality snacks, sweet treats, and specialty
-              beverages. Our passion is creating memorable food experiences,
-              from buttery nachos and gourmet popcorn to sweet crepes and
-              refreshing slushes.
-            </p>
-            <p>
-              With outlets across Dubai and Abu Dhabi, we combine a cozy, modern
-              café ambience with innovative flavors, premium ingredients, and
-              friendly service. Every visit promises fun, flavor, and a little
-              touch of magic.
-            </p>
-            <p>
-              Our mission is simple: serve the finest food and snacks with care
-              and creativity, making every bite enjoyable and every cup
-              memorable. Welcome to AmexiQ Café!
-            </p>
+            <h3>{heading}</h3>
+            {paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </FadeWrapper>
         </div>
         <section className="about-points">
-          {Points.map((items, index) => (
-            <div className="about-main-point">
+          {points.map((point, index) => (
+            <div className="about-main-point" key={index}>
               <FadeWrapper baseDelay={0} gap={150}>
                 <div className="about-second-point">
-                  <div className="point-number">{items.number}</div>
+                  <div className="point-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
                   <div className="point-header">
-                    <h3>{items.heading}</h3>
-                    <p className="point-title">{items.title}</p>
+                    <h3>{point.title}</h3>
+                    <p className="point-title">{point.description}</p>
                   </div>
                 </div>
               </FadeWrapper>
