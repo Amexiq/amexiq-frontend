@@ -17,8 +17,8 @@ import { galleryImagesQuery } from "../../sanity/queries";
 // Add/edit your social profiles here — each entry needs an icon and a url.
 const socialLinks = [
   { name: "WhatsApp", icon: WhatsAppIcon, url: "https://wa.me/971557347125" },
-  { name: "Facebook", icon: FacebookIcon, url: "https://facebook.com/" },
-  { name: "Instagram", icon: InstagramIcon, url: "https://instagram.com/" },
+  // { name: "Facebook", icon: FacebookIcon, url: "https://facebook.com/" },
+  { name: "Instagram", icon: InstagramIcon, url: "https://www.instagram.com/amexiq?igsi=eDJtdnJwN254OHNi" },
 ];
 
 export default function Footer() {

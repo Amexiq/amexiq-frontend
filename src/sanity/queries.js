@@ -1,11 +1,17 @@
 export const menuItemsQuery = `*[_type == "menuItem"] | order(_createdAt asc) {
   _id,
   name,
-  "categories": category,
+  "categories": category->name,
   description,
   image,
   rating,
-  reviews
+  reviews,
+  featured
+}`;
+
+export const menuCategoriesQuery = `*[_type == "menuCategory"] | order(order asc) {
+  _id,
+  name
 }`;
 
 export const galleryImagesQuery = `*[_type == "galleryImage"] | order(order asc) {

@@ -5,28 +5,29 @@ import { Star } from "@mui/icons-material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
 import { sanityClient, urlFor } from "../../sanity/client";
-import { menuItemsQuery } from "../../sanity/queries";
+import { menuItemsQuery, menuCategoriesQuery } from "../../sanity/queries";
 
 export default function Menu() {
   const [menuItems, setMenuItems] = useState([]);
+  const [categories, setCategories] = useState(["All Dishes"]);
 
   useEffect(() => {
     sanityClient
       .fetch(menuItemsQuery)
       .then((data) => setMenuItems(data))
       .catch((err) => console.error("Failed to fetch menu items:", err));
+
+    sanityClient
+      .fetch(menuCategoriesQuery)
+      .then((data) =>
+        setCategories(["All Dishes", ...data.map((c) => c.name)])
+      )
+      .catch((err) => console.error("Failed to fetch menu categories:", err));
   }, []);
 
   const path = useLocation();
   const [activeCategory, setActiveCategory] = useState("All Dishes");
   const [finaldata, setFinalData] = useState([]);
-  const categories = [
-    "All Dishes",
-    "Dessert",
-    "Drinks",
-    "Main Dishes",
-    "Starters",
-  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 

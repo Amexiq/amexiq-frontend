@@ -1,58 +1,29 @@
 
-import React, { useRef, useState } from "react";
-import Popcorn from "../../assets/images/popcorn.png";
-import Nachos from "../../assets/images/nachos.png";
-import Mini from "../../assets/images/mini.png";
-import Sweet from "../../assets/images/sweet.png";
-import French from "../../assets/images/french.png";
+import React, { useRef, useState, useEffect } from "react";
 import "./main.css";
 import { Link } from "react-router-dom";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
+import { sanityClient, urlFor } from "../../sanity/client";
+import { menuItemsQuery } from "../../sanity/queries";
 
+const MAX_HOME_PRODUCTS = 5;
 
 export default function MainContent() {
-  const products = [
-    {
-      id: 1,
-      name: "Coffee Cup",
-      img: Popcorn,
-      oldPrice: "₹450.00",
-      newPrice: "₹350.00",
-      rating: 4,
-    },
-    {
-      id: 2,
-      name: "Cold Brew",
-      img: Nachos,
-      oldPrice: "₹750.00",
-      newPrice: "₹700.00",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Mini Bites",
-      img: Mini,
-      oldPrice: "₹500.00",
-      newPrice: "₹420.00",
-      rating: 3,
-    },
-    {
-      id: 4,
-      name: "Sweet Delight",
-      img: Sweet,
-      oldPrice: "₹600.00",
-      newPrice: "₹520.00",
-      rating: 4,
-    },
-    {
-      id: 5,
-      name: "French Roast",
-      img: French,
-      oldPrice: "₹800.00",
-      newPrice: "₹750.00",
-      rating: 2,
-    },
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(menuItemsQuery)
+      .then((items) => {
+        const featured = items.filter((item) => item.featured);
+        const chosen =
+          featured.length > 0
+            ? featured
+            : [...items].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        setProducts(chosen.slice(0, MAX_HOME_PRODUCTS));
+      })
+      .catch((err) => console.error("Failed to fetch menu items:", err));
+  }, []);
 
   const scrollRef = useRef(null);
   function renderStars(rating) {
@@ -111,16 +82,19 @@ export default function MainContent() {
       <div className="products-wrapper">
         <div className="main-products" ref={scrollRef}>
           {products.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img src={product.img} alt={product.name} />
+            <div className="product-card" key={product._id}>
+              <img
+                src={
+                  product.image
+                    ? urlFor(product.image).width(300).url()
+                    : undefined
+                }
+                alt={product.name}
+              />
               <h3>{product.name}</h3>
 
               {/* Dynamic Star Rating */}
               {renderStars(product.rating)}
-
-              {/* <p className="price">
-      <span className="old">{product.oldPrice}</span> {product.newPrice}
-    </p> */}
 
               <Link to="/menu" className="cart-btn">
                 View More

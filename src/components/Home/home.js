@@ -1,7 +1,7 @@
 
 import React from "react";
 import "./Home.css";
-import Amexiq1 from "../../assets/images/amexiq-5.png";
+import Amexiq1 from "../../assets/images/hero.jpg";
 import Main from "../Main-Content/main";
 import DailyTrack from "../Daily-Track/dailytrack";
 import Map from "../Map/map";
