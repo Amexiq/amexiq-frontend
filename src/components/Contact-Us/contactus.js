@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./contactus.css";
 import SendIcon from "@mui/icons-material/Send";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+// import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
 import * as Yup from "yup";
@@ -100,7 +100,7 @@ export default function ContactUs() {
 
               <div className="contact-points">
                 {/* Visit Us */}
-                <div className="contact-card">
+                {/* <div className="contact-card">
                   <div className="contact-icon">
                     <LocationOnIcon fontSize="large" />
                   </div>
@@ -116,7 +116,7 @@ export default function ContactUs() {
                       Faby Land & Xtream Zone, Sharjah
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Call Us */}
                 <div className="contact-card">
@@ -145,10 +145,8 @@ export default function ContactUs() {
                     <h3>Email Us</h3>
                     <p>
                       📧 info@amexiq.com <br />
-                      support@amexiq.com
                     </p>
                     <small>
-                      For partnerships: business@amexiq.com <br />
                       We aim to reply within 24 hours.
                     </small>
                   </div>

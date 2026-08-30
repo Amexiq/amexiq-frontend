@@ -76,7 +76,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <img src={Mail} alt="Email" />
-                  <span><a href="mailto:info@amexiqae.com" target="_blank" rel="noopener noreferrer">info@amexiqae.com</a></span>
+                  <span><a href="mailto:info@amexiq.com" target="_blank" rel="noopener noreferrer">info@amexiq.com</a></span>
                 </li>
               </ul>
               {/* <Link to="contact">Read More</Link> */}
