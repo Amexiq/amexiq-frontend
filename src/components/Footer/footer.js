@@ -6,7 +6,6 @@ import Mail from "../../assets/images/at.png";
 import Headerlogo from "../../assets/images/header-logo.png";
 import IbCafeLogo from "../../assets/images/ib_cafe_logo.jpg";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Link } from "react-router-dom";

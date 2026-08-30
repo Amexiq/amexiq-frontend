@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./menu.css";
 import { Star } from "@mui/icons-material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
 import { sanityClient, urlFor } from "../../sanity/client";
 import { menuItemsQuery, menuCategoriesQuery } from "../../sanity/queries";
@@ -28,25 +28,6 @@ export default function Menu() {
   const path = useLocation();
   const [activeCategory, setActiveCategory] = useState("All Dishes");
   const [finaldata, setFinalData] = useState([]);
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Set active category whenever index changes
-  useEffect(() => {
-    setActiveCategory(categories[currentIndex]);
-  }, [currentIndex]);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === categories.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? categories.length - 1 : prevIndex - 1
-    );
-  };
 
   const navigate = useNavigate();
 

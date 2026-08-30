@@ -6,7 +6,6 @@ import Main from "../Main-Content/main";
 import DailyTrack from "../Daily-Track/dailytrack";
 import Map from "../Map/map";
 import Menu from "../Menu/menu";
-import CoffeeFactory from "../Coffee/cofee";
 import { Link } from "react-router-dom";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
