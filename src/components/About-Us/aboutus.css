@@ -325,6 +325,9 @@
 }
 
 .package-buttons .order-delivery {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-accent);
   border: none;
   padding: 0.9rem 2rem;
@@ -333,6 +336,7 @@
   font-weight: 500;
   cursor: pointer;
   font-family: "Rubik", sans-serif;
+  text-decoration: none;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -345,6 +349,9 @@
 }
 
 .package-buttons .menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   border: 2px solid var(--color-accent);
   padding: 0.9rem 2rem;
@@ -353,6 +360,7 @@
   font-weight: 500;
   cursor: pointer;
   font-family: "Rubik", sans-serif;
+  text-decoration: none;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
 }

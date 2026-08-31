@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Amexiq1 from "../../assets/images/amexiq-1.png";
 import Package from "../../assets/images/pack.png";
 import FadeWrapper from "../FadeOnScroll/FadeOnScroll";
@@ -94,8 +95,12 @@ export default function AboutSection() {
                 adds value to your brand.
               </p>
               <div className="package-buttons">
-                <button className="order-delivery">📞 Call for Enquiry</button>
-                <button className="menu">✉️ Contact Us</button>
+                <a href="tel:+971557347125" className="order-delivery">
+                  📞 Call for Enquiry
+                </a>
+                <Link to="/contact" className="menu">
+                  ✉️ Contact Us
+                </Link>
               </div>
             </FadeWrapper>
           </div>

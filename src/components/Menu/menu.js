@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./menu.css";
 import { Star } from "@mui/icons-material";
@@ -48,6 +48,35 @@ export default function Menu() {
   }, [activeCategory, menuItems]);
 
   const isMenuPage = path.pathname === "/menu";
+
+  const HOME_PREVIEW_COUNT = 6;
+  const homePreviewItems = useMemo(() => {
+    const oneFromEachCategory = [];
+    const seenCategories = new Set();
+    menuItems.forEach((item) => {
+      const category = item.categories || "Other";
+      if (!seenCategories.has(category)) {
+        seenCategories.add(category);
+        oneFromEachCategory.push(item);
+      }
+    });
+
+    if (oneFromEachCategory.length >= HOME_PREVIEW_COUNT) {
+      return oneFromEachCategory.slice(0, HOME_PREVIEW_COUNT);
+    }
+
+    const usedIds = new Set(oneFromEachCategory.map((item) => item._id));
+    const remaining = menuItems
+      .filter((item) => !usedIds.has(item._id))
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+    return [
+      ...oneFromEachCategory,
+      ...remaining.slice(0, HOME_PREVIEW_COUNT - oneFromEachCategory.length),
+    ];
+  }, [menuItems]);
+
+  const displayedItems = isMenuPage ? finaldata : homePreviewItems;
 
   return (
     <>
@@ -118,13 +147,13 @@ export default function Menu() {
 
           <div
             className={`menu-wrapper ${
-              finaldata.length === 1 ? "single-item" : ""
+              displayedItems.length === 1 ? "single-item" : ""
             }`}
           >
-            {finaldata.length === 0 ? (
+            {displayedItems.length === 0 ? (
               <p className="no-items-message">No Item Found in category</p>
             ) : (
-              finaldata.map((item, index) => (
+              displayedItems.map((item, index) => (
                 <div
                   className="menu-item"
                   style={{ animationDelay: `${index * 0.1}s` }}

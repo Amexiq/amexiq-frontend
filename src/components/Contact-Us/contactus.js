@@ -126,7 +126,7 @@ export default function ContactUs() {
                   <div>
                     <h3>Call Us</h3>
                     <p>
-                      📞 +971 52 123 4567 <br />☎ +971 4 234 5678
+                      📞 +971 55 734 7125 <br />☎ +971 50 968 2568
                     </p>
                     <small>
                       Available daily <br />
